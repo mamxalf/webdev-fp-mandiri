@@ -74,6 +74,10 @@
                             Home</a></li>
                     <li><a href="{{route("user.index")}}"><span class="oi oi-people"></span>
                             User Management</a></li>
+                    <li><a href="{{route("category.index")}}"><span class="oi oi-list-rich"></span>
+                            List Categories</a></li>
+                    <li><a href="{{route("item.index")}}"><span class="oi oi-box"></span>
+                            List Items</a></li>
 
                     <div class="d-block d-md-none">
                         <div class="dropdown-divider"></div>

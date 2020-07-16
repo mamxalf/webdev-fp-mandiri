@@ -15,6 +15,9 @@ class CategoryController extends Controller
     public function index()
     {
         //
+        $data = Category::all();
+
+        return view('category.index', ['categories' => $data]);
     }
 
     /**
@@ -25,6 +28,7 @@ class CategoryController extends Controller
     public function create()
     {
         //
+        return view('category.create');
     }
 
     /**
@@ -36,6 +40,16 @@ class CategoryController extends Controller
     public function store(Request $request)
     {
         //
+        \Validator::make($request->all(),[
+            "name" => "required|min:5|max:100"
+        ])->validate();
+
+        $new_category = new Category;
+
+        $new_category->name = $request->get('name');
+        $new_category->save();
+
+        return redirect()->route('category.create')->with('status', 'Category successfully created');
     }
 
     /**
