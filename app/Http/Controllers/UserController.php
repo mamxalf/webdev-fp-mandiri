@@ -93,6 +93,9 @@ class UserController extends Controller
     public function edit($id)
     {
         //
+        $user = \App\User::findOrFail($id);
+
+        return view('users.edit', ['user' => $user]);
     }
 
     /**
@@ -105,6 +108,13 @@ class UserController extends Controller
     public function update(Request $request, $id)
     {
         //
+        $user = \App\User::findOrFail($id);
+        $user->name = $request->get('name');
+        $user->username = $request->get('username');
+        $user->email = $request->get('email');
+        $user->save();
+
+        return redirect()->route('user.edit', [$id])->with('status', 'User successfully updated');
     }
 
     /**
@@ -116,5 +126,9 @@ class UserController extends Controller
     public function destroy($id)
     {
         //
+        $user = \App\User::findOrFail($id);
+
+        $user->delete();
+        return redirect()->route('user.index')->with('status', 'User successfully delete');
     }
 }

@@ -92,9 +92,19 @@ class ItemController extends Controller
      * @param  \App\Item  $item
      * @return \Illuminate\Http\Response
      */
-    public function edit(Item $item)
+    public function edit($id)
     {
         //
+        $brand = Brand::all();
+        $category = Category::all();
+        $item = \App\Item::findOrFail($id);
+        $data = [
+            'brands' => $brand,
+            'categories' => $category,
+            'item' => $item
+        ];
+
+        return view('item.edit', $data);
     }
 
     /**
@@ -104,9 +114,17 @@ class ItemController extends Controller
      * @param  \App\Item  $item
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Item $item)
+    public function update(Request $request, $id)
     {
         //
+        $item = \App\Item::findOrFail($id);
+        $item->name = $request->get('name');
+        $item->id_category = $request->get('id_category');
+        $item->id_brand = $request->get('id_brand');
+        $item->price = $request->get('price');
+        $item->save();
+
+        return redirect()->route('item.edit', [$id])->with('status', 'Item successfully updated');
     }
 
     /**
@@ -115,8 +133,12 @@ class ItemController extends Controller
      * @param  \App\Item  $item
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Item $item)
+    public function destroy($id)
     {
         //
+        $item = \App\Item::findOrFail($id);
+
+        $item->delete();
+        return redirect()->route('item.index')->with('status', 'Item successfully delete');
     }
 }
