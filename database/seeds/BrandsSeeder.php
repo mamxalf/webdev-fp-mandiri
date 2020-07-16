@@ -3,7 +3,7 @@
 use Faker\Factory as Faker;
 use Illuminate\Database\Seeder;
 
-class CategoriesSeeder extends Seeder
+class BrandsSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -16,7 +16,7 @@ class CategoriesSeeder extends Seeder
         $faker = Faker::create('id_ID');
 
         for($i = 1; $i <= 5; $i++){
-            DB::table('categories')->insert([
+            DB::table('brands')->insert([
                 'name' => $faker->word
             ]);
 

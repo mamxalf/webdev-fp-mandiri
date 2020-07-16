@@ -76,6 +76,8 @@
                             User Management</a></li>
                     <li><a href="{{route("category.index")}}"><span class="oi oi-list-rich"></span>
                             List Categories</a></li>
+                    <li><a href="{{route("brand.index")}}"><span class="oi oi-puzzle-piece"></span>
+                            List Brands</a></li>
                     <li><a href="{{route("item.index")}}"><span class="oi oi-box"></span>
                             List Items</a></li>
 

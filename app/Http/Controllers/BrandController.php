@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Category;
+use App\Brand;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
 
-class CategoryController extends Controller
+class BrandController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -18,7 +18,7 @@ class CategoryController extends Controller
         $this->middleware('auth');
 
         $this->middleware(function($request, $next){
-            if(Gate::allows('manage-categories')) return $next($request);
+            if(Gate::allows('manage-brands')) return $next($request);
             abort(403, 'Anda tidak memiliki cukup hak akses');
         });
     }
@@ -26,9 +26,9 @@ class CategoryController extends Controller
     public function index()
     {
         //
-        $data = Category::all();
+        $data = Brand::all();
 
-        return view('category.index', ['categories' => $data]);
+        return view('brand.index', ['brands' => $data]);
     }
 
     /**
@@ -39,7 +39,7 @@ class CategoryController extends Controller
     public function create()
     {
         //
-        return view('category.create');
+        return view('brand.create');
     }
 
     /**
@@ -55,21 +55,21 @@ class CategoryController extends Controller
             "name" => "required|min:5|max:100"
         ])->validate();
 
-        $new_category = new Category;
+        $new_brand = new Brand;
 
-        $new_category->name = $request->get('name');
-        $new_category->save();
+        $new_brand->name = $request->get('name');
+        $new_brand->save();
 
-        return redirect()->route('category.create')->with('status', 'Category successfully created');
+        return redirect()->route('brand.create')->with('status', 'brand successfully created');
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Category  $category
+     * @param  \App\Brand  $brand
      * @return \Illuminate\Http\Response
      */
-    public function show(Category $category)
+    public function show(Brand $brand)
     {
         //
     }
@@ -77,10 +77,10 @@ class CategoryController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Category  $category
+     * @param  \App\Brand  $brand
      * @return \Illuminate\Http\Response
      */
-    public function edit(Category $category)
+    public function edit(Brand $brand)
     {
         //
     }
@@ -89,10 +89,10 @@ class CategoryController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Category  $category
+     * @param  \App\Brand  $brand
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Category $category)
+    public function update(Request $request, Brand $brand)
     {
         //
     }
@@ -100,10 +100,10 @@ class CategoryController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Category  $category
+     * @param  \App\Brand  $brand
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Category $category)
+    public function destroy(Brand $brand)
     {
         //
     }
